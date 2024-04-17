@@ -6,21 +6,15 @@
 
 void ScenePlay::Init()
 {
-
-
 	player.Init();
-
+	mapchip.Init();
 
 }
 
 
 void ScenePlay::Step()
 {
-
-
-
 	player.Step();
-
 
 }
 
@@ -28,17 +22,13 @@ void ScenePlay::Step()
 
 void ScenePlay::Draw()
 {
-
 	player.Draw();
-
-
 
 }
 
 
 void ScenePlay::Fin()
 {
-
 
 	/*
 	g_current_scene_ID = Clear;
