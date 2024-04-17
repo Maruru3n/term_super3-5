@@ -8,3 +8,14 @@ using namespace std;
 
 void InitGame();
 void FinGame();
+
+extern int g_current_scene_ID;
+enum SceneID
+{
+	Title,
+	Play,
+	GameOver,
+	Clear,
+
+	LOOP
+};

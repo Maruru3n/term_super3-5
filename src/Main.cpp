@@ -3,6 +3,9 @@
 #include "Frame/Frame.h"
 #include "Input/Input.h"
 #include "Collision/Collision.h"
+#include "Scene/SceneManager.h"
+
+int g_current_scene_ID;
 
 // Win32アプリケーションは WinMain関数 から始まる
 int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nCmdShow)
@@ -18,6 +21,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 	//-----------------------------------------
 
 	InitGame();
+	SceneManager scene_manager;
 
 	//-----------------------------------------
 	//ゲームメインループ
@@ -61,7 +65,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 			//ここにゲームの本体を書く
 			//-----------------------------------------
 
-
+			scene_manager.Main();
 
 			// ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 			//ループの終わりに
@@ -99,6 +103,8 @@ void InitGame()
 	SetDrawScreen(DX_SCREEN_BACK);	//描画するスクリーンを設定する
 
 	Input::InitInput();
+
+	g_current_scene_ID = Title;
 }
 
 void FinGame()
