@@ -8,8 +8,8 @@ protected:
 	float NextX;//次のX座標
 	float NextY;//次のY座標
 
-	int sizeX;
-	int sizeY;
+	int sizeX;//プレイヤーのXサイズ
+	int sizeY;//プレイヤーのYサイズ
 
 
 public:
