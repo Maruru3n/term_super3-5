@@ -6,15 +6,20 @@
 #include "SceneClear/SceneClear.h"
 #include "SceneGameOver/SceneGameOver.h"
 
+
+//コンストラクタ
 SceneManager::SceneManager()
 {
 	scene = nullptr;
 }
 
+
+//シーン遷移メイン処理
 void SceneManager::Main()
 {
+
 	switch (g_current_scene_ID) {
-	case Title: {
+	case Title: {//タイトル
 		if (scene != nullptr) {
 			scene->Fin();
 			delete scene;
@@ -27,7 +32,7 @@ void SceneManager::Main()
 
 		break;
 	}
-	case Play: {
+	case Play: {//プレイ
 		if (scene != nullptr) {
 			scene->Fin();
 			delete scene;
@@ -39,7 +44,7 @@ void SceneManager::Main()
 		g_current_scene_ID = LOOP;
 		break;
 	}
-	case GameOver: {
+	case GameOver: {//ゲームオーバー
 		if (scene != nullptr) {
 			scene->Fin();
 			delete scene;
@@ -51,7 +56,7 @@ void SceneManager::Main()
 		g_current_scene_ID = LOOP;
 		break;
 	}
-	case Clear: {
+	case Clear: {//クリア
 		if (scene != nullptr) {
 			scene->Fin();
 			delete scene;
@@ -63,7 +68,7 @@ void SceneManager::Main()
 		g_current_scene_ID = LOOP;
 		break;
 	}
-	default: {
+	default: {//通常処理
 		scene->Step();
 		scene->Draw();
 	}

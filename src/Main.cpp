@@ -104,7 +104,7 @@ void InitGame()
 
 	Input::InitInput();
 
-	g_current_scene_ID = Title;
+	g_current_scene_ID = Play;
 }
 
 void FinGame()
