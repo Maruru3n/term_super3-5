@@ -12,6 +12,7 @@ protected:
 	float y;//現在のY座標
 	float nextX;//次のX座標
 	float nextY;//次のY座標
+	float movePowerX;//横の移動量
 	float jumpPower;//ジャンプ力
 
 	bool jumpFlag;//ジャンプフラグ
