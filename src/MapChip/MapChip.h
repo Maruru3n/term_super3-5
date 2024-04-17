@@ -27,4 +27,6 @@ public:
 	void Fin();
 
 	void LeadFile(char* file_name);
+
+	int GetMapData(int index_y, int index_x) { return m_mapchip_data_num[index_y][index_x]; }
 };
