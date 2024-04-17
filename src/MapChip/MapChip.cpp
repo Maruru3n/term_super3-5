@@ -15,13 +15,18 @@ void MapChip::Init()
 {
 	LeadFile((char*)MAPCHIP_DATA_PATH[m_stage_index]);
 }
-void MapChip::Step()
-{
-
-}
 void MapChip::Draw()
 {
-
+	for (int index_y = 0; index_y < MAPCHIP_NUM_Y; index_y++) {
+		for (int index_x = 0; index_x < MAPCHIP_NUM_X; index_x++) {
+			if (m_mapchip_data_num[index_y][index_x] == 1)
+				DrawBox(index_x * MAPCHIP_SIZE_X,
+					index_y * MAPCHIP_SIZE_Y,
+					(index_x + 1)* MAPCHIP_SIZE_X,
+					(index_y + 1) * MAPCHIP_SIZE_Y,
+					GetColor(255, 0, 0), true);
+		}
+	}
 }
 void MapChip::Fin()
 {

@@ -23,7 +23,6 @@ public:
 	MapChip();
 
 	void Init();
-	void Step();
 	void Draw();
 	void Fin();
 

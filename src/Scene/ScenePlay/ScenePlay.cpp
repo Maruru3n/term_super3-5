@@ -22,6 +22,7 @@ void ScenePlay::Step()
 
 void ScenePlay::Draw()
 {
+	mapchip.Draw();
 	player.Draw();
 
 }
