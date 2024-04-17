@@ -64,8 +64,8 @@ void SceneManager::Main()
 		break;
 	}
 	default: {
-
-		
+		scene->Step();
+		scene->Draw();
 	}
 	}
 }
