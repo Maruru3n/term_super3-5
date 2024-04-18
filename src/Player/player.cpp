@@ -25,6 +25,9 @@ void Player::Step() {
 	//À•W‚ğXV
 	pre_pos_x = current_pos_x;
 	pre_pos_y = current_pos_y;
+
+	if (current_pos_y < 0)
+		jumpFlag = true;
 		
 	animIndex = 0;
 

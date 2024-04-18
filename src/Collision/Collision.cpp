@@ -4,34 +4,32 @@
 #include "../MyMath/MyMath.h"
 
 //当たっているときどの方向から当たっているか
-//１，２，３，４：右、下、左、上
+//０，１，２，３：右、下、左、上
 int Collision::GetHitDirection2D(VECTOR objects, int size_x1, int size_y1,
 								VECTOR use, int size_x2, int size_y2,
-								int& overlap_x, int& overlap_y)
+								float& overlap_x, float& overlap_y)
 {
-	int plas_x = 0;
-	int plas_y = 1;
+	int plas = 0;
 
 	if (objects.x < use.x) {
 		overlap_x = objects.x + size_x1 - use.x;
+		plas = 0;
 	}
 	else {
 		overlap_x = use.x + size_x2 - objects.x;
-		plas_x = 2;
+		plas = 2;
 	}
 
 	if (objects.y < use.y) {
 		overlap_y = objects.y + size_y1 - use.y;
+		plas = 1;
 	}
 	else {
 		overlap_y = use.y + size_y2 - objects.y;
-		plas_y = 2;
+		plas = 3;
 	}
-
-	if (overlap_x < overlap_y)
-		return plas_x;
-	else
-		return plas_y;
+	
+	return plas;
 }
 
 //矩形の当たり判定

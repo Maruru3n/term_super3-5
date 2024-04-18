@@ -6,7 +6,7 @@ class Collision {
 public:
 
 	//“–‚½‚Á‚Ä‚¢‚é‚Æ‚«‚Ç‚Ì•ûŒü‚©‚ç“–‚½‚Á‚Ä‚¢‚é‚©
-	static int GetHitDirection2D(VECTOR objects, int size_x1, int size_y1, VECTOR use, int size_x2, int size_y2, int& overlap_x, int& overlap_y);
+	static int GetHitDirection2D(VECTOR objects, int size_x1, int size_y1, VECTOR use, int size_x2, int size_y2, float& overlap_x, float& overlap_y);
 
 	//‹éŒ`‚Ì“–‚½‚è”»’è
 	static bool IsHitRect(float x1, float y1, float w1, float h1, float x2, float y2, float w2, float h2);
