@@ -26,7 +26,9 @@ void Player::Step() {
 	pre_pos_x = current_pos_x;
 	pre_pos_y = current_pos_y;
 
-	if (current_pos_y < 0)
+	if (current_pos_y < 0 ||
+		current_pos_x < 0 ||
+		current_pos_x > SCREEN_SIZE_X)
 		jumpFlag = true;
 		
 	animIndex = 0;
@@ -35,7 +37,7 @@ void Player::Step() {
 	if (!jumpFlag) {
 		if (Input::IsKeyKeep(KEY_INPUT_SPACE)) {
 			animIndex = 1;
-			movePowerX += 0.1;
+			movePowerX += 0.1f;
 			if (movePowerX >= 4) {
 				movePowerX = 4;
 			}
@@ -74,17 +76,28 @@ void Player::Draw() {
 	//チャージゲージ描画
 	if (!jumpFlag) {
 		if (Input::IsKeyKeep(KEY_INPUT_SPACE)) {
-			DrawBox(current_pos_x, current_pos_y- 30, current_pos_x + 50, current_pos_y-5, GetColor(255, 0, 0), true);
+			DrawBox((int)current_pos_x,
+				(int)(current_pos_y - 30),
+				(int)(current_pos_x + 50),
+				(int)(current_pos_y - 5),
+				GetColor(255, 0, 0), true);
+
 			int Color = GetColor(0, 255, 0);
+
 			if (jumpPower >= 50) { Color = GetColor(255, 255, 0); }
-			DrawBox(current_pos_x, current_pos_y - 30, current_pos_x + jumpPower, current_pos_y-5, Color, true);
+
+			DrawBox((int)current_pos_x,
+				(int)(current_pos_y - 30),
+				(int)(current_pos_x + jumpPower),
+				(int)(current_pos_y - 5),
+				Color, true);
 		}
 	}
 
 	//プレイヤー描画
 	//DrawGraph(current_pos_x, current_pos_y,handle[animIndex], true);
 	
-	DrawTurnGraph(current_pos_x, current_pos_y, handle[animIndex],true);
+	DrawTurnGraph((int)current_pos_x, (int)current_pos_y, handle[animIndex],true);
 
 	//ジャンプパワー描画
 	DrawFormatString(0,0,GetColor(255,0,0),"%f",jumpPower);

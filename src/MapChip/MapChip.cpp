@@ -21,10 +21,16 @@ void MapChip::Draw()
 		for (int index_x = 0; index_x < MAPCHIP_NUM_X; index_x++) {
 			if (m_mapchip_data_num[index_y][index_x] == 1)
 				DrawBox(index_x * MAPCHIP_SIZE_X,
-					index_y * MAPCHIP_SIZE_Y,
-					(index_x + 1)* MAPCHIP_SIZE_X,
-					(index_y + 1) * MAPCHIP_SIZE_Y,
-					GetColor(255, 0, 0), true);
+						index_y * MAPCHIP_SIZE_Y,
+						(index_x + 1)* MAPCHIP_SIZE_X,
+						(index_y + 1) * MAPCHIP_SIZE_Y,
+						GetColor(255, 0, 0), true);
+			if (m_mapchip_data_num[index_y][index_x] == 2)
+				DrawBox(index_x * MAPCHIP_SIZE_X,
+						index_y * MAPCHIP_SIZE_Y,
+						(index_x + 1) * MAPCHIP_SIZE_X,
+						(index_y + 1) * MAPCHIP_SIZE_Y,
+						GetColor(0, 255, 0), true);
 		}
 	}
 }

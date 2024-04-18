@@ -6,20 +6,20 @@
 void CollisionMapPlayer(MapChip& mapchip, Player& player)
 {
 	//プレイヤーの存在するマップの添え字をだす
-	int player_area_num_x = player.GetCurrentPosX() / MAPCHIP_SIZE_X;
-	int player_area_num_y = player.GetCurrentPosY() / MAPCHIP_SIZE_Y;
+	int player_area_num_x = (int)(player.GetCurrentPosX() / MAPCHIP_SIZE_X);
+	int player_area_num_y = (int)(player.GetCurrentPosY() / MAPCHIP_SIZE_Y);
 	VECTOR player_pos = { player.GetCurrentPosX() ,player.GetCurrentPosY(),0 };
 
 	for (int index_y = player_area_num_y; index_y <= player_area_num_y + 1; index_y++) {
 		for (int index_x = player_area_num_x; index_x <= player_area_num_x + 1; index_x++) {
 			int mapdata = mapchip.GetMapData(index_y, index_x);
-			if (mapchip.GetMapData(index_y, index_x) != 1)
+			if (mapchip.GetMapData(index_y, index_x) == 0)
 				continue;
 
-			VECTOR mapchip_pos = { index_x * MAPCHIP_SIZE_X ,index_y * MAPCHIP_SIZE_Y };
+			VECTOR mapchip_pos = { (float)(index_x * MAPCHIP_SIZE_X) ,(float)(index_y * MAPCHIP_SIZE_Y) };
 
 			if (Collision::IsHitRect(player_pos.x, player_pos.y,
-									player.GetSizeX(), player.GetSizeY(),
+									(float)(player.GetSizeX()), (float)(player.GetSizeY()),
 									mapchip_pos.x, mapchip_pos.y,
 									MAPCHIP_SIZE_X, MAPCHIP_SIZE_Y)) {
 
@@ -46,6 +46,8 @@ void CollisionMapPlayer(MapChip& mapchip, Player& player)
 					break;
 				}
 				case 3: {
+					if (player_pos.y < 0)
+						break;
 					float a = player_pos.y - overlap_y;
 					player.SetCurrentPosY(player_pos.y - overlap_y);
 					player.SetJump();
