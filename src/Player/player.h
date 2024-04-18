@@ -5,7 +5,8 @@ constexpr int PLAYER_COLLISION_SIZE = 80;
 class Player {
 protected:
 
-	int handle;//プレイヤーの画像
+	int handle[3];//プレイヤーの画像
+	int animIndex;//アニメーションの添え字
 	int sizeX;//プレイヤーのXサイズ
 	int sizeY;//プレイヤーのYサイズ
 

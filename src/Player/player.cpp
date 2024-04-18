@@ -4,7 +4,8 @@
 
 void Player::Init() {
 
-	handle = LoadGraph("Data/Image/Play/Player/Player.png");
+	LoadDivGraph("Data/Image/Play/Player/Player.png",3,1,3,80,80, handle);
+	animIndex = 0;
 	current_pos_x = 200;
 	current_pos_y = 600;
 	pre_pos_x = 200;
@@ -21,13 +22,16 @@ void Player::Init() {
 
 void Player::Step() {
 	
-
+	//座標を更新
 	pre_pos_x = current_pos_x;
 	pre_pos_y = current_pos_y;
 		
+	animIndex = 0;
+
 	//ジャンプ処理（ジャンプ力はためる）
 	if (!jumpFlag) {
 		if (Input::IsKeyKeep(KEY_INPUT_SPACE)) {
+			animIndex = 1;
 			movePowerX += 0.1;
 			if (movePowerX >= 4) {
 				movePowerX = 4;
@@ -42,6 +46,7 @@ void Player::Step() {
 		}
 	}
 	if (jumpFlag) {
+		animIndex = 2;
 		current_pos_x += movePowerX;
 		current_pos_y -= jumpPower;
 		jumpPower -= 0.5;
@@ -63,7 +68,7 @@ void Player::Step() {
 
 void Player::Draw() {
 
-	//デバック用
+	//チャージゲージ描画
 	if (!jumpFlag) {
 		if (Input::IsKeyKeep(KEY_INPUT_SPACE)) {
 			DrawBox(current_pos_x, current_pos_y- 30, current_pos_x + 50, current_pos_y-5, GetColor(255, 0, 0), true);
@@ -72,7 +77,12 @@ void Player::Draw() {
 			DrawBox(current_pos_x, current_pos_y - 30, current_pos_x + jumpPower, current_pos_y-5, Color, true);
 		}
 	}
-	DrawGraph(current_pos_x, current_pos_y,handle,true);
 
+	//プレイヤー描画
+	//DrawGraph(current_pos_x, current_pos_y,handle[animIndex], true);
+	
+	DrawTurnGraph(current_pos_x, current_pos_y, handle[animIndex],true);
+
+	//ジャンプパワー描画
 	DrawFormatString(0,0,GetColor(255,0,0),"%f",jumpPower);
 }
