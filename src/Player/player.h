@@ -41,6 +41,12 @@ public:
 	//現在のY座標を得る
 	float GetCurrentPosY() { return current_pos_y; }
 
+	//プレイヤーX座標をセット
+	void SetCurrentPosX(float pos_x) { current_pos_x = pos_x; }
+
+	//プレイヤーY座標をセット
+	void SetCurrentPosY(float pos_y) { current_pos_y = pos_y; }
+
 	//プレイヤーのXサイズ
 	int GetSizeX() { return sizeX; }
 
