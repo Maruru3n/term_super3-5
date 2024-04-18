@@ -3,7 +3,6 @@
 #include "../../Common.h"
 
 
-
 void ScenePlay::Init()
 {
 	player.Init();
@@ -15,7 +14,7 @@ void ScenePlay::Init()
 void ScenePlay::Step()
 {
 	player.Step();
-
+	CollisionMapPlayer(mapchip, player);
 }
 
 

@@ -1,7 +1,6 @@
 #pragma once
 #include "../SceneBace/SceneBace.h"
-#include "../../Player/player.h"
-#include "../../MapChip/MapChip.h"
+#include "../../GameCollision/GameCollision.h"
 
 class ScenePlay :public SceneBace
 {
