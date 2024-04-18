@@ -11,8 +11,8 @@ protected:
 
 	float current_pos_x;//現在のX座標
 	float current_pos_y;//現在のY座標
-	float pre_pos_X;//前のX座標
-	float pre_pos_Y;//前のY座標
+	float pre_pos_x;//前のX座標
+	float pre_pos_y;//前のY座標
 	float movePowerX;//横の移動量
 	float jumpPower;//ジャンプ力
 
@@ -20,10 +20,33 @@ protected:
 
 public:
 	
+	//初期化
 	void Init();
 
+	//通常処理
 	void Step();
 
+	//描画処理
 	void Draw();
 
+	//前フレームのX座標を得る
+	float GetPrePosX() { return pre_pos_x; }
+
+	//前フレームのY座標を得る
+	float GetPrePosY() { return pre_pos_y; }
+
+	//現在のX座標を得る
+	float GetCurrentPosX() { return current_pos_x; }
+
+	//現在のY座標を得る
+	float GetCurrentPosY() { return current_pos_y; }
+
+	//プレイヤーのXサイズ
+	int GetSizeX() { return sizeX; }
+
+	//プレイヤーのYサイズ
+	int GetSizeY() { return sizeY; }
+
+	//床の当たり判定をとったときに呼んでくれるとうれしい
+	void SetJump() { jumpFlag = false; }
 };

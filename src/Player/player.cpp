@@ -7,9 +7,11 @@ void Player::Init() {
 	handle = LoadGraph("Data/Image/Play/Player/Player.png");
 	current_pos_x = 200;
 	current_pos_y = 600;
+	pre_pos_x = 200;
+	pre_pos_y = 600;
+	sizeX = 80;
+	sizeY = 80;
 
-	pre_pos_X = 200;
-	pre_pos_Y = 600;
 	movePowerX = 0;
 
 	jumpFlag = false;
@@ -20,8 +22,8 @@ void Player::Init() {
 void Player::Step() {
 	
 
-	pre_pos_X = current_pos_x;
-	pre_pos_Y = current_pos_y;
+	pre_pos_x = current_pos_x;
+	pre_pos_y = current_pos_y;
 		
 	//ジャンプ処理（ジャンプ力はためる）
 	if (!jumpFlag) {
