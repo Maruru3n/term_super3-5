@@ -5,6 +5,7 @@
 void Player::Init() {
 
 	hp = PLAYER_DEFAULT_HP;
+	pre_hp = hp;
 
 	LoadDivGraph("Data/Image/Play/Player/Player.png",3,1,3,80,80, handle);
 	animIndex = 0;
@@ -27,7 +28,8 @@ void Player::Init() {
 
 
 void Player::Step() {
-	
+	//残りの体力を更新
+	pre_hp = hp;
 	//座標を更新
 	pre_pos_x = current_pos_x;
 	pre_pos_y = current_pos_y;
@@ -43,10 +45,15 @@ void Player::Step() {
 	}
 	//下に落ちたら元の場所に戻す
 	if (current_pos_y > SCREEN_SIZE_Y) {
-		ResetPos();
 		hp--;
-		if (hp < 0)
+		if (hp <= 0) {
+			if(pre_hp==1)
+				g_count_time = GetNowCount();
 			hp = 0;
+			current_pos_y = SCREEN_SIZE_Y;
+		}
+		else
+			ResetPos();
 	}
 		
 	animIndex = 0;

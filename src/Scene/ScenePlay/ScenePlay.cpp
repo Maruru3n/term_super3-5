@@ -38,6 +38,14 @@ void ScenePlay::Step()
 		if (elapsed_time >= 3000)
 			g_current_scene_ID = Clear;
 	}
+	if (player.GetHP() == 0) {
+		int elapsed_time = 0;
+
+		elapsed_time = GetNowCount() - g_count_time;
+
+		if (elapsed_time >= 3000)
+			g_current_scene_ID = GameOver;
+	}
 }
 
 

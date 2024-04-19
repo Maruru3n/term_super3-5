@@ -11,6 +11,7 @@ class Player {
 protected:
 
 	int hp;
+	int pre_hp;
 
 	int handle[3];//プレイヤーの画像
 	int animIndex;//アニメーションの添え字
@@ -45,6 +46,10 @@ public:
 	void Draw();
 
 	void Move();
+
+	//体力を得る
+	int GetHP() { return hp; }
+	int GetPreHP() { return pre_hp; }
 
 	//前フレームのX座標を得る
 	float GetPrePosX() { return pre_pos_x; }
