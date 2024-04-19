@@ -6,6 +6,7 @@
 #include "Scene/SceneManager.h"
 
 int g_current_scene_ID;
+int g_count_time;
 
 // Win32アプリケーションは WinMain関数 から始まる
 int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nCmdShow)

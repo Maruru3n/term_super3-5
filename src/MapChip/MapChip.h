@@ -28,6 +28,8 @@ public:
 
 	void LeadFile(char* file_name);
 
+	int GetStageIndex() { return m_stage_index; }
+
 	int GetMapData(int index_y, int index_x) {
 		int x = index_x;
 		int y = index_y;

@@ -27,6 +27,17 @@ void ScenePlay::Step()
 {
 	player.Step();
 	CollisionMapPlayer(mapchip, player);
+
+	player.IsGoal();
+
+	if (player.GetGoalFlag()) {
+		int elapsed_time = 0;
+
+		elapsed_time = GetNowCount() - g_count_time;
+
+		if (elapsed_time >= 3000)
+			g_current_scene_ID = Clear;
+	}
 }
 
 

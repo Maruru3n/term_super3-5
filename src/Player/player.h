@@ -31,6 +31,7 @@ protected:
 	bool moveXFlag;//横移動フラグ
 
 	bool goalFlag;
+	bool pre_goalFlag;
 
 public:
 	
@@ -66,6 +67,7 @@ public:
 	//プレイヤーの最初の座標
 	void SetDefaultPos(float pos_x, float pos_y);
 	void Reset();
+	void ResetPos();
 
 	//床の当たり判定をとったときに呼んでくれるとうれしい
 	void SetJumpFlag(bool flag = false) { jumpFlag = flag; }
@@ -75,5 +77,8 @@ public:
 	float GetMovePowerX() { return movePowerX; }
 	void SetMovePowerX(float power) { movePowerX = power; }
 
+	bool GetGoalFlag() { return goalFlag; }
 	void SetGoalFlag(bool flag = true) { goalFlag = flag; }
+
+	void IsGoal();
 };

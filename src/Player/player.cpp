@@ -22,6 +22,7 @@ void Player::Init() {
 	moveXFlag = false;
 
 	goalFlag = false;
+	pre_goalFlag = goalFlag;
 }
 
 
@@ -30,6 +31,8 @@ void Player::Step() {
 	//座標を更新
 	pre_pos_x = current_pos_x;
 	pre_pos_y = current_pos_y;
+	//フラグを更新
+	pre_goalFlag = goalFlag;
 
 	//画面外に行ってもジャンプ処理を行うようにする
 	if (current_pos_y < 0 ||
@@ -40,7 +43,7 @@ void Player::Step() {
 	}
 	//下に落ちたら元の場所に戻す
 	if (current_pos_y > SCREEN_SIZE_Y) {
-		Reset();
+		ResetPos();
 		hp--;
 		if (hp < 0)
 			hp = 0;
@@ -143,6 +146,17 @@ void Player::Reset()
 	hp = PLAYER_DEFAULT_HP;
 	goalFlag = false;
 
+	ResetPos();
+}
+void Player::ResetPos()
+{
 	current_pos_x = default_pos_x;
 	current_pos_y = default_pos_y;
+}
+
+void Player::IsGoal()
+{
+	if (!pre_goalFlag && goalFlag) {
+		g_count_time = GetNowCount();
+	}
 }
