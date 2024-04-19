@@ -8,17 +8,16 @@ void Player::Init() {
 	animIndex = 0;
 	default_pos_x = 0;
 	default_pos_y = 0;
-	current_pos_x = 200;
-	current_pos_y = 600;
-	pre_pos_x = 200;
-	pre_pos_y = 600;
-	sizeX = 80;
-	sizeY = 80;
+	current_pos_x = 0;
+	current_pos_y = 0;
+	pre_pos_x = 0;
+	pre_pos_y = 0;
 
-	movePowerX = 0;
+	movePowerX = PLAYER_DEFAULT_MOVE_POWER;
+	jumpPower = 0;
 
 	jumpFlag = false;
-	jumpPower = 0;
+	moveXFlag = false;
 }
 
 
@@ -31,8 +30,10 @@ void Player::Step() {
 	//画面外に行ってもジャンプ処理を行うようにする
 	if (current_pos_y < 0 ||
 		current_pos_x < 0 ||
-		current_pos_x > SCREEN_SIZE_X)
+		current_pos_x > SCREEN_SIZE_X) {
 		jumpFlag = true;
+		moveXFlag = true;
+	}
 	//下に落ちたら元の場所に戻す
 	if (current_pos_y > SCREEN_SIZE_Y) {
 		ResetPos();
@@ -44,10 +45,6 @@ void Player::Step() {
 	if (!jumpFlag) {
 		if (Input::IsKeyKeep(KEY_INPUT_SPACE)) {
 			animIndex = 1;
-			movePowerX += 0.1f;
-			if (movePowerX >= 4) {
-				movePowerX = 4;
-			}
 			jumpPower += 0.5;
 			if (jumpPower >= 50) {
 				jumpPower = 50;
@@ -55,26 +52,42 @@ void Player::Step() {
 		}
 		if (Input::IsKeyRelease(KEY_INPUT_SPACE)) {
 			jumpFlag = true;
+			moveXFlag = true;
+			movePowerX = PLAYER_DEFAULT_MOVE_POWER;
 		}
 	}
-	if (jumpFlag) {
-		animIndex = 2;
-		current_pos_x += movePowerX;
-		current_pos_y -= jumpPower;
-		jumpPower -= 0.5;
-		if (jumpPower <= 0) {
-			jumpPower = 0;
-		}
-	}
-	current_pos_y +=9;
+
+	Move();
+
 	//一時的な当たり判定
 	/*if (current_pos_y >= 720-80) {
 		jumpFlag = false;
 		current_pos_y = 720 - 80;
 	}*/
 	if (current_pos_x >= 1280) {
-		current_pos_x = -80;
+		current_pos_x = -PLAYER_COLLISION_SIZE;
 	}
+	if (current_pos_x < -PLAYER_COLLISION_SIZE) {
+		current_pos_x = -PLAYER_COLLISION_SIZE;
+	}
+}
+
+void Player::Move()
+{
+	//ジャンプ処理
+	if (jumpFlag) {
+		animIndex = 2;
+		current_pos_y -= jumpPower;
+		jumpPower -= 0.5;
+		if (jumpPower <= 0) {
+			jumpPower = 0;
+		}
+	}
+	//横移動処理
+	if (moveXFlag) {
+		current_pos_x += movePowerX;
+	}
+	current_pos_y += 9;
 }
 
 
@@ -108,7 +121,8 @@ void Player::Draw() {
 
 	//ジャンプパワー描画
 	DrawFormatString(0,0,GetColor(255,0,0),"%f",jumpPower);
-	DrawFormatString(0,15,GetColor(255,0,0),"%f,%f", current_pos_x, current_pos_y);
+	DrawFormatString(0,15,GetColor(255,0,0),"%f", movePowerX);
+	DrawFormatString(0,30,GetColor(255,0,0),"%f,%f", current_pos_x, current_pos_y);
 }
 
 void Player::SetDefaultPos(float pos_x, float pos_y)
