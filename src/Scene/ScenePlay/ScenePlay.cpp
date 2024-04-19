@@ -15,7 +15,7 @@ void ScenePlay::Init()
 				float player_default_pos_y = (float)(index_y * MAPCHIP_SIZE_Y);
 
 				player.SetDefaultPos(player_default_pos_x, player_default_pos_y);
-				player.ResetPos();
+				player.Reset();
 				break;
 			}
 		}

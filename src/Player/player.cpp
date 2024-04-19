@@ -4,6 +4,8 @@
 
 void Player::Init() {
 
+	hp = PLAYER_DEFAULT_HP;
+
 	LoadDivGraph("Data/Image/Play/Player/Player.png",3,1,3,80,80, handle);
 	animIndex = 0;
 	default_pos_x = 0;
@@ -18,6 +20,8 @@ void Player::Init() {
 
 	jumpFlag = false;
 	moveXFlag = false;
+
+	goalFlag = false;
 }
 
 
@@ -36,28 +40,34 @@ void Player::Step() {
 	}
 	//下に落ちたら元の場所に戻す
 	if (current_pos_y > SCREEN_SIZE_Y) {
-		ResetPos();
+		Reset();
+		hp--;
+		if (hp < 0)
+			hp = 0;
 	}
 		
 	animIndex = 0;
 
-	//ジャンプ処理（ジャンプ力はためる）
-	if (!jumpFlag) {
-		if (Input::IsKeyKeep(KEY_INPUT_SPACE)) {
-			animIndex = 1;
-			jumpPower += 0.5;
-			if (jumpPower >= 50) {
-				jumpPower = 50;
+	//ゴールしていないなら行う処理
+	if (!goalFlag) {
+		//ジャンプ処理（ジャンプ力はためる）
+		if (!jumpFlag) {
+			if (Input::IsKeyKeep(KEY_INPUT_SPACE)) {
+				animIndex = 1;
+				jumpPower += 0.5;
+				if (jumpPower >= 50) {
+					jumpPower = 50;
+				}
+			}
+			if (Input::IsKeyRelease(KEY_INPUT_SPACE)) {
+				jumpFlag = true;
+				moveXFlag = true;
+				movePowerX = PLAYER_DEFAULT_MOVE_POWER;
 			}
 		}
-		if (Input::IsKeyRelease(KEY_INPUT_SPACE)) {
-			jumpFlag = true;
-			moveXFlag = true;
-			movePowerX = PLAYER_DEFAULT_MOVE_POWER;
-		}
-	}
 
-	Move();
+		Move();
+	}
 
 	//一時的な当たり判定
 	/*if (current_pos_y >= 720-80) {
@@ -120,9 +130,7 @@ void Player::Draw() {
 	DrawTurnGraph((int)current_pos_x, (int)current_pos_y, handle[animIndex],true);
 
 	//ジャンプパワー描画
-	DrawFormatString(0,0,GetColor(255,0,0),"%f",jumpPower);
-	DrawFormatString(0,15,GetColor(255,0,0),"%f", movePowerX);
-	DrawFormatString(0,30,GetColor(255,0,0),"%f,%f", current_pos_x, current_pos_y);
+	DrawFormatString(0,0,GetColor(255,0,0),"%d",hp);
 }
 
 void Player::SetDefaultPos(float pos_x, float pos_y)
@@ -130,8 +138,11 @@ void Player::SetDefaultPos(float pos_x, float pos_y)
 	default_pos_x = pos_x;
 	default_pos_y = pos_y;
 }
-void Player::ResetPos()
+void Player::Reset()
 {
+	hp = PLAYER_DEFAULT_HP;
+	goalFlag = false;
+
 	current_pos_x = default_pos_x;
 	current_pos_y = default_pos_y;
 }

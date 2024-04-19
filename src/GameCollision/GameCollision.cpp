@@ -16,9 +16,11 @@ void CollisionMapPlayer(MapChip& mapchip, Player& player)
 	if (player_pos.y < 0 || player_pos.y >= SCREEN_SIZE_Y - PLAYER_COLLISION_SIZE)
 		return;
 
+	//プレイヤーが接しているマップチップ４ブロック分調べる
 	for (int index_y = player_area_num_y; index_y <= player_area_num_y + 1; index_y++) {
 		for (int index_x = player_area_num_x; index_x <= player_area_num_x + 1; index_x++) {
 			int mapdata = mapchip.GetMapData(index_y, index_x);
+			//ブロックがない又はプレイヤーの初期座標なら何も行わない
 			if (mapchip.GetMapData(index_y, index_x) == 0 || mapchip.GetMapData(index_y, index_x) == 1)
 				continue;
 
@@ -45,23 +47,27 @@ void CollisionMapPlayer(MapChip& mapchip, Player& player)
 
 				switch (direction_num) {
 				case 0: {
+					//右から
 					float a = player_pos.x + overlap_x;
 					player.SetCurrentPosX(player_pos.x + overlap_x);
 					player.SetMovePowerX(player.GetMovePowerX() * -1);
 					break;
 				}
 				case 1: {
+					//下から
 					float a = player_pos.y + overlap_y;
 					player.SetCurrentPosY(player_pos.y + overlap_y);
 					break;
 				}
 				case 2: {
+					//左から
 					float a = player_pos.x - overlap_x;
 					player.SetCurrentPosX(player_pos.x - overlap_x);
 					player.SetMovePowerX(player.GetMovePowerX() * -1);
 					break;
 				}
 				case 3: {
+					//上から
 					float a = player_pos.y - overlap_y;
 					player.SetCurrentPosY(player_pos.y - overlap_y);
 					player.SetJumpFlag();
@@ -69,6 +75,8 @@ void CollisionMapPlayer(MapChip& mapchip, Player& player)
 					if (mapchip.GetMapData(index_y, index_x) == 2 || mapchip.GetMapData(index_y, index_x) == 3) {
 						player.SetMoveFlag();
 						player.SetMovePowerX(PLAYER_DEFAULT_MOVE_POWER);
+						if (mapchip.GetMapData(index_y, index_x) == 3)
+							player.SetGoalFlag();
 					}
 					if (mapchip.GetMapData(index_y, index_x) == 4) {
 						if (player.GetMovePowerX() > 0)

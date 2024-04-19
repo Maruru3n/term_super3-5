@@ -5,8 +5,12 @@ constexpr int PLAYER_COLLISION_SIZE = 80;
 constexpr float PLAYER_DEFAULT_MOVE_POWER = 4.0f;
 constexpr float PLAYER_SLOW_MOVE_POWER = 1.0f;
 
+constexpr int PLAYER_DEFAULT_HP = 5;
+
 class Player {
 protected:
+
+	int hp;
 
 	int handle[3];//プレイヤーの画像
 	int animIndex;//アニメーションの添え字
@@ -25,6 +29,8 @@ protected:
 
 	bool jumpFlag;//ジャンプフラグ
 	bool moveXFlag;//横移動フラグ
+
+	bool goalFlag;
 
 public:
 	
@@ -59,7 +65,7 @@ public:
 
 	//プレイヤーの最初の座標
 	void SetDefaultPos(float pos_x, float pos_y);
-	void ResetPos();
+	void Reset();
 
 	//床の当たり判定をとったときに呼んでくれるとうれしい
 	void SetJumpFlag(bool flag = false) { jumpFlag = flag; }
@@ -68,4 +74,6 @@ public:
 	//プレイヤーの横向きに動く力
 	float GetMovePowerX() { return movePowerX; }
 	void SetMovePowerX(float power) { movePowerX = power; }
+
+	void SetGoalFlag(bool flag = true) { goalFlag = flag; }
 };
