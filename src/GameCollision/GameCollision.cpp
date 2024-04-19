@@ -10,10 +10,13 @@ void CollisionMapPlayer(MapChip& mapchip, Player& player)
 	int player_area_num_y = (int)(player.GetCurrentPosY() / MAPCHIP_SIZE_Y);
 	VECTOR player_pos = { player.GetCurrentPosX() ,player.GetCurrentPosY(),0 };
 
+	if (player_pos.y < 0 || player_pos.y >= SCREEN_SIZE_Y - PLAYER_COLLISION_SIZE)
+		return;
+
 	for (int index_y = player_area_num_y; index_y <= player_area_num_y + 1; index_y++) {
 		for (int index_x = player_area_num_x; index_x <= player_area_num_x + 1; index_x++) {
 			int mapdata = mapchip.GetMapData(index_y, index_x);
-			if (mapchip.GetMapData(index_y, index_x) == 0)
+			if (mapchip.GetMapData(index_y, index_x) == 0 || mapchip.GetMapData(index_y, index_x) == 1)
 				continue;
 
 			VECTOR mapchip_pos = { (float)(index_x * MAPCHIP_SIZE_X) ,(float)(index_y * MAPCHIP_SIZE_Y) };
@@ -46,8 +49,6 @@ void CollisionMapPlayer(MapChip& mapchip, Player& player)
 					break;
 				}
 				case 3: {
-					if (player_pos.y < 0)
-						break;
 					float a = player_pos.y - overlap_y;
 					player.SetCurrentPosY(player_pos.y - overlap_y);
 					player.SetJump();

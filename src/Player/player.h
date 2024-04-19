@@ -12,8 +12,13 @@ protected:
 
 	float current_pos_x;//現在のX座標
 	float current_pos_y;//現在のY座標
+
 	float pre_pos_x;//前のX座標
 	float pre_pos_y;//前のY座標
+
+	float default_pos_x;//最初のX座標
+	float default_pos_y;//最初のY座標
+
 	float movePowerX;//横の移動量
 	float jumpPower;//ジャンプ力
 
@@ -47,6 +52,9 @@ public:
 
 	//プレイヤーY座標をセット
 	void SetCurrentPosY(float pos_y) { current_pos_y = pos_y; }
+
+	void SetDefaultPos(float pos_x, float pos_y);
+	void ResetPos();
 
 	//プレイヤーのXサイズ
 	int GetSizeX() { return sizeX; }

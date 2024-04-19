@@ -6,6 +6,8 @@ void Player::Init() {
 
 	LoadDivGraph("Data/Image/Play/Player/Player.png",3,1,3,80,80, handle);
 	animIndex = 0;
+	default_pos_x = 0;
+	default_pos_y = 0;
 	current_pos_x = 200;
 	current_pos_y = 600;
 	pre_pos_x = 200;
@@ -26,10 +28,15 @@ void Player::Step() {
 	pre_pos_x = current_pos_x;
 	pre_pos_y = current_pos_y;
 
+	//画面外に行ってもジャンプ処理を行うようにする
 	if (current_pos_y < 0 ||
 		current_pos_x < 0 ||
 		current_pos_x > SCREEN_SIZE_X)
 		jumpFlag = true;
+	//下に落ちたら元の場所に戻す
+	if (current_pos_y > SCREEN_SIZE_Y) {
+		ResetPos();
+	}
 		
 	animIndex = 0;
 
@@ -61,10 +68,10 @@ void Player::Step() {
 	}
 	current_pos_y +=9;
 	//一時的な当たり判定
-	if (current_pos_y >= 720-80) {
+	/*if (current_pos_y >= 720-80) {
 		jumpFlag = false;
 		current_pos_y = 720 - 80;
-	}
+	}*/
 	if (current_pos_x >= 1280) {
 		current_pos_x = -80;
 	}
@@ -101,4 +108,16 @@ void Player::Draw() {
 
 	//ジャンプパワー描画
 	DrawFormatString(0,0,GetColor(255,0,0),"%f",jumpPower);
+	DrawFormatString(0,15,GetColor(255,0,0),"%f,%f", current_pos_x, current_pos_y);
+}
+
+void Player::SetDefaultPos(float pos_x, float pos_y)
+{
+	default_pos_x = pos_x;
+	default_pos_y = pos_y;
+}
+void Player::ResetPos()
+{
+	current_pos_x = default_pos_x;
+	current_pos_y = default_pos_y;
 }

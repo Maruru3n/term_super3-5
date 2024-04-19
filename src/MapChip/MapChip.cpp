@@ -19,13 +19,13 @@ void MapChip::Draw()
 {
 	for (int index_y = 0; index_y < MAPCHIP_NUM_Y; index_y++) {
 		for (int index_x = 0; index_x < MAPCHIP_NUM_X; index_x++) {
-			if (m_mapchip_data_num[index_y][index_x] == 1)
+			if (m_mapchip_data_num[index_y][index_x] == 2)
 				DrawBox(index_x * MAPCHIP_SIZE_X,
 						index_y * MAPCHIP_SIZE_Y,
 						(index_x + 1)* MAPCHIP_SIZE_X,
 						(index_y + 1) * MAPCHIP_SIZE_Y,
 						GetColor(255, 0, 0), true);
-			if (m_mapchip_data_num[index_y][index_x] == 2)
+			if (m_mapchip_data_num[index_y][index_x] == 3)
 				DrawBox(index_x * MAPCHIP_SIZE_X,
 						index_y * MAPCHIP_SIZE_Y,
 						(index_x + 1) * MAPCHIP_SIZE_X,

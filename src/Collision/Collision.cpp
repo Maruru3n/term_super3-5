@@ -9,27 +9,31 @@ int Collision::GetHitDirection2D(VECTOR objects, int size_x1, int size_y1,
 								VECTOR use, int size_x2, int size_y2,
 								float& overlap_x, float& overlap_y)
 {
-	int plas = 0;
+	int plas_x = 0;
+	int plas_y = 0;
 
 	if (objects.x < use.x) {
 		overlap_x = objects.x + size_x1 - use.x;
-		plas = 0;
+		plas_x = 0;
 	}
 	else {
 		overlap_x = use.x + size_x2 - objects.x;
-		plas = 2;
+		plas_x = 2;
 	}
 
 	if (objects.y < use.y) {
 		overlap_y = objects.y + size_y1 - use.y;
-		plas = 1;
+		plas_y = 1;
 	}
 	else {
 		overlap_y = use.y + size_y2 - objects.y;
-		plas = 3;
+		plas_y = 3;
 	}
 	
-	return plas;
+	if (overlap_x < overlap_y)
+		return plas_x;
+	else
+		return plas_y;
 }
 
 //‹éŒ`‚Ì“–‚½‚è”»’è
