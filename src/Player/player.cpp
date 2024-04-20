@@ -8,6 +8,7 @@ void Player::Init() {
 	pre_hp = hp;
 
 	LoadDivGraph("Data/Image/Play/Player/Player.png",3,1,3,80,80, handle);
+	hpHandle = LoadGraph("Data/Image/Play/Player/hp.png");
 	animIndex = 0;
 	default_pos_x = 0;
 	default_pos_y = 0;
@@ -80,10 +81,6 @@ void Player::Step() {
 	}
 
 	//一時的な当たり判定
-	/*if (current_pos_y >= 720-80) {
-		jumpFlag = false;
-		current_pos_y = 720 - 80;
-	}*/
 	if (current_pos_x >= 1280) {
 		current_pos_x = -PLAYER_COLLISION_SIZE;
 	}
@@ -135,12 +132,15 @@ void Player::Draw() {
 	}
 
 	//プレイヤー描画
-	//DrawGraph(current_pos_x, current_pos_y,handle[animIndex], true);
-	
 	DrawTurnGraph((int)current_pos_x, (int)current_pos_y, handle[animIndex],true);
 
+	//ｈｐ描画
+	for (int index = 0;index < hp;index++) {
+		DrawGraph(0 + 34 * index, 2, hpHandle, true);
+	}
+
 	//ジャンプパワー描画
-	DrawFormatString(0,0,GetColor(255,0,0),"%d",hp);
+	//DrawFormatString(0,0,GetColor(255,0,0),"%d",hp);
 }
 
 void Player::SetDefaultPos(float pos_x, float pos_y)

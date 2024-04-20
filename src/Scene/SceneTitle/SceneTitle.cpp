@@ -26,6 +26,8 @@ void SceneTitle::Step()
 	if (ui_size >1.2) {
 		size_flag = true;
 	}
+
+	//エンターキーが押されるとシーンを移動
 	if (Input::IsKeyPush(KEY_INPUT_RETURN))
 		g_current_scene_ID = Play;
 }

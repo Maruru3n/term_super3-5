@@ -14,6 +14,7 @@ protected:
 	int pre_hp;
 
 	int handle[3];//プレイヤーの画像
+	int hpHandle;
 	int animIndex;//アニメーションの添え字
 
 	float current_pos_x;//現在のX座標
