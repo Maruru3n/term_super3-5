@@ -8,6 +8,10 @@ private:
 	Player player;
 	MapChip mapchip;
 
+	int m_stage_clear_handle;
+	int m_gameover_handle;
+	double m_handle_extend;
+
 public:
 	void Init();
 	void Step();

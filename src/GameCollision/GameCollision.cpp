@@ -76,10 +76,10 @@ void CollisionMapPlayer(MapChip& mapchip, Player& player)
 						player.SetMoveFlag();
 						player.SetMovePowerX(PLAYER_DEFAULT_MOVE_POWER);
 						if (mapchip.GetMapData(index_y, index_x) == 3) {
-							if (mapchip.GetStageIndex() == STAGE_NUM - 1)
-								player.SetGoalFlag();
+							player.SetGoalFlag();
 						}
 					}
+					//°‚ª•X‚È‚ç
 					if (mapchip.GetMapData(index_y, index_x) == 4) {
 						if (player.GetMovePowerX() > 0)
 							player.SetMovePowerX(PLAYER_SLOW_MOVE_POWER);

@@ -3,7 +3,7 @@
 constexpr int PLAYER_COLLISION_SIZE = 80;
 
 constexpr float PLAYER_DEFAULT_MOVE_POWER = 4.0f;
-constexpr float PLAYER_SLOW_MOVE_POWER = 1.0f;
+constexpr float PLAYER_SLOW_MOVE_POWER = 2.0f;
 
 constexpr int PLAYER_DEFAULT_HP = 5;
 
@@ -50,6 +50,7 @@ public:
 
 	//体力を得る
 	int GetHP() { return hp; }
+	void SetHP(int set_hp) { hp = set_hp; }
 	int GetPreHP() { return pre_hp; }
 
 	//前フレームのX座標を得る
