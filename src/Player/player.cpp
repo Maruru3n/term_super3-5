@@ -104,7 +104,7 @@ void Player::Move()
 	if (moveXFlag) {
 		current_pos_x += movePowerX;
 	}
-	current_pos_y += 9;
+	current_pos_y += 8;
 }
 
 

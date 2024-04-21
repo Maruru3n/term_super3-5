@@ -8,17 +8,13 @@ void CollisionMapPlayer(MapChip& mapchip, Player& player)
 {
 	player.SetJumpFlag(true);
 
-	//プレイヤーの存在するマップの添え字をだす
-	int player_area_num_x = (int)(player.GetCurrentPosX() / MAPCHIP_SIZE_X);
-	int player_area_num_y = (int)(player.GetCurrentPosY() / MAPCHIP_SIZE_Y);
 	VECTOR player_pos = { player.GetCurrentPosX() ,player.GetCurrentPosY(),0 };
 
 	if (player_pos.y < 0 || player_pos.y >= SCREEN_SIZE_Y - PLAYER_COLLISION_SIZE)
 		return;
 
-	//プレイヤーが接しているマップチップ４ブロック分調べる
-	for (int index_y = player_area_num_y; index_y <= player_area_num_y + 1; index_y++) {
-		for (int index_x = player_area_num_x; index_x <= player_area_num_x + 1; index_x++) {
+	for (int index_y = 0; index_y <= MAPCHIP_NUM_Y; index_y++) {
+		for (int index_x = 0; index_x <= MAPCHIP_NUM_X; index_x++) {
 			int mapdata = mapchip.GetMapData(index_y, index_x);
 			//ブロックがない又はプレイヤーの初期座標なら何も行わない
 			if (mapchip.GetMapData(index_y, index_x) == 0 || mapchip.GetMapData(index_y, index_x) == 1)
