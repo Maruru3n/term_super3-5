@@ -11,6 +11,7 @@ void FinGame();
 
 extern int g_current_scene_ID;
 extern int g_count_time;
+extern int font_handle;
 
 enum SceneID
 {

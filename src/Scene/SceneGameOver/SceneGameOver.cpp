@@ -2,6 +2,7 @@
 #include "../../Common.h"
 #include "SceneGameOver.h"
 #include "../../Input/Input.h"
+#include "../../MapChip/MapChip.h"
 
 void SceneGameOver::Init()
 {
@@ -9,6 +10,21 @@ void SceneGameOver::Init()
 	handle[0] = LoadGraph("Data/Image/GameOver/gameOver.png");
 	handle[1] = LoadGraph("Data/Image/GameOver/gameOverUI.png");
 	alpha = 0;
+
+	FILE* fp;
+	errno_t err;
+
+	err = fopen_s(&fp, "Data/Image/MapChip/SaveData.txt", "r");
+
+	if (err != NULL)
+		return;
+
+	char stage_index_c;
+	stage_index_c = fgetc(fp);
+
+	stage_index = stage_index_c - '0';
+
+	fclose(fp);
 }
 void SceneGameOver::Step()
 {
@@ -26,6 +42,7 @@ void SceneGameOver::Draw()
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND,0);
 	if (alpha >= 255) {
 		DrawGraph(0, 0, handle[1], true);
+		DrawFormatStringToHandle(600, 330, GetColor(255, 255, 255), font_handle, "%d Å^ %d", stage_index, STAGE_NUM);
 	}
 }
 void SceneGameOver::Fin()

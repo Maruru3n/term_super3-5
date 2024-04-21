@@ -7,6 +7,7 @@
 
 int g_current_scene_ID;
 int g_count_time;
+int font_handle;
 
 // Win32アプリケーションは WinMain関数 から始まる
 int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nCmdShow)
@@ -104,6 +105,7 @@ void InitGame()
 	SetDrawScreen(DX_SCREEN_BACK);	//描画するスクリーンを設定する
 
 	Input::InitInput();
+	font_handle = CreateFontToHandle("HGP創英角ﾎﾟｯﾌﾟ体", 40, 3);
 
 	g_current_scene_ID = Title;
 }
@@ -111,4 +113,5 @@ void InitGame()
 void FinGame()
 {
 	//最後に１回だけやる処理をここに書く
+	DeleteFontToHandle(font_handle);
 }

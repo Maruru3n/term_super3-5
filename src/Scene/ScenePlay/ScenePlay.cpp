@@ -103,12 +103,28 @@ void ScenePlay::Draw()
 		DrawRotaGraph(SCREEN_SIZE_X / 2, SCREEN_SIZE_Y / 2,
 						m_handle_extend, 0.0,
 						m_gameover_handle, true);
+
+	int font_width = GetDrawFormatStringWidthToHandle(font_handle, "%d Å^ %d", mapchip.GetStageIndex(), STAGE_NUM);
+	DrawFormatStringToHandle(SCREEN_SIZE_X - font_width, 0,
+							GetColor(255, 255, 255), font_handle,
+							"%d Å^ %d", mapchip.GetStageIndex(), STAGE_NUM);
 }
 
 
 void ScenePlay::Fin()
 {
+	FILE* fp;
+	errno_t err;
 
+	err = fopen_s(&fp, "Data/Image/MapChip/SaveData.txt", "w");
+
+	if (err != NULL)
+		return;
+
+	fprintf(fp, "%d", mapchip.GetStageIndex());
+
+
+	fclose(fp);
 	/*
 	g_current_scene_ID = Clear;
 	g_current_scene_ID = GameOver;

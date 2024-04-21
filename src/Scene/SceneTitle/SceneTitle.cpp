@@ -15,10 +15,10 @@ void SceneTitle::Step()
 {
 	//UI‚ÌƒTƒCƒY‚ğ•Ï‚¦‚éˆ—
 	if (!size_flag) {
-		ui_size += 0.005;
+		ui_size += 0.005f;
 	}
 	else {
-		ui_size -= 0.005;
+		ui_size -= 0.005f;
 	}
 	if (ui_size < 1.0) {
 		size_flag = false;

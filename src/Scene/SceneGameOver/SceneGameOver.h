@@ -6,6 +6,8 @@ constexpr char GAMEOVER_BG_HANDLE_PATH[] = { "Data/Image/GameOver/bg_GameOver.pn
 class SceneGameOver :public SceneBace
 {
 private:
+	int stage_index;
+
 	int handle[2];
 	int alpha;
 
