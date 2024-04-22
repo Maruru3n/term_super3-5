@@ -6,6 +6,7 @@ constexpr char CLEAR_BG_HANDLE_PATH[] = { "Data/Image/Clear/Clear.png" };
 class SceneClear :public SceneBace
 {
 private:
+	int SE;
 
 public:
 	void Init();

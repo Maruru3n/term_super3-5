@@ -6,6 +6,7 @@
 void SceneClear::Init()
 {
 	m_bg_handle = LoadGraph(CLEAR_BG_HANDLE_PATH);
+	SE = LoadSoundMem("Data/Sound/clear.bgm.mp3");
 }
 void SceneClear::Step()
 {

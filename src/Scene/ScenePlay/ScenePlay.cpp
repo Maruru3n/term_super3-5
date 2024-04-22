@@ -26,6 +26,7 @@ void ScenePlay::Init()
 			}
 		}
 	}
+	ChangeVolumeSoundMem(255 * 80 / 100, BGM);
 	PlaySoundMem(BGM, DX_PLAYTYPE_LOOP);
 }
 

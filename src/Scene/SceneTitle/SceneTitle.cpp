@@ -7,6 +7,7 @@ void SceneTitle::Init()
 {
 	m_bg_handle = LoadGraph(TITLE_BG_HANDLE_PATH);
 	BGM = LoadSoundMem("Data/Sound/title.mp3");
+	SE = LoadSoundMem("Data/Sound/select.mp3");
 	ui_handle[0] = LoadGraph("Data/Image/Title/titleName.png");
 	ui_handle[1] = LoadGraph("Data/Image/Title/titleUI.png");
 	ui_size = 1.0;
@@ -30,8 +31,10 @@ void SceneTitle::Step()
 	}
 
 	//エンターキーが押されるとシーンを移動
-	if (Input::IsKeyPush(KEY_INPUT_RETURN))
+	if (Input::IsKeyPush(KEY_INPUT_RETURN)) {
+		PlaySoundMem(SE, DX_PLAYTYPE_BACK);
 		g_current_scene_ID = Play;
+	}
 }
 void SceneTitle::Draw()
 {

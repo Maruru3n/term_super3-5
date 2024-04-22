@@ -9,6 +9,7 @@ class SceneTitle :public SceneBace
 private:
 	int ui_handle[2];
 	int BGM;
+	int SE;
 	float ui_size;
 	bool size_flag;
 public:
