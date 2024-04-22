@@ -9,6 +9,9 @@ void Player::Init() {
 
 	LoadDivGraph("Data/Image/Play/Player/Player.png",3,1,3,80,80, handle);
 	hpHandle = LoadGraph("Data/Image/Play/Player/hp.png");
+	soundHandle[0]= LoadSoundMem("Data/Sound/jump1.mp3");
+	soundHandle[1] = LoadSoundMem("Data/Sound/jump2.mp3");
+	
 	animIndex = 0;
 	default_pos_x = 0;
 	default_pos_y = 0;
@@ -25,6 +28,7 @@ void Player::Init() {
 
 	goalFlag = false;
 	pre_goalFlag = goalFlag;
+	
 }
 
 
@@ -52,6 +56,7 @@ void Player::Step() {
 				g_count_time = GetNowCount();
 			hp = 0;
 			current_pos_y = SCREEN_SIZE_Y;
+			StopSoundMem(soundHandle[0]);
 		}
 		else
 			ResetPos();
@@ -63,6 +68,9 @@ void Player::Step() {
 	if (!goalFlag) {
 		//ジャンプ処理（ジャンプ力はためる）
 		if (!jumpFlag) {
+			if (Input::IsKeyPush(KEY_INPUT_SPACE)) {
+				PlaySoundMem(soundHandle[0], DX_PLAYTYPE_BACK);
+			}
 			if (Input::IsKeyKeep(KEY_INPUT_SPACE)) {
 				animIndex = 1;
 				jumpPower += 0.5;
@@ -71,6 +79,7 @@ void Player::Step() {
 				}
 			}
 			if (Input::IsKeyRelease(KEY_INPUT_SPACE)) {
+				PlaySoundMem(soundHandle[1], DX_PLAYTYPE_BACK);
 				jumpFlag = true;
 				moveXFlag = true;
 				movePowerX = PLAYER_DEFAULT_MOVE_POWER;

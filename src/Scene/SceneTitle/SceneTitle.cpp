@@ -6,10 +6,12 @@
 void SceneTitle::Init()
 {
 	m_bg_handle = LoadGraph(TITLE_BG_HANDLE_PATH);
+	BGM = LoadSoundMem("Data/Sound/title.mp3");
 	ui_handle[0] = LoadGraph("Data/Image/Title/titleName.png");
 	ui_handle[1] = LoadGraph("Data/Image/Title/titleUI.png");
 	ui_size = 1.0;
 	size_flag = false;
+	PlaySoundMem(BGM, DX_PLAYTYPE_LOOP);
 }
 void SceneTitle::Step()
 {
@@ -39,5 +41,5 @@ void SceneTitle::Draw()
 }
 void SceneTitle::Fin()
 {
-
+	StopSoundMem(BGM);
 }

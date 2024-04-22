@@ -8,6 +8,7 @@ class SceneGameOver :public SceneBace
 private:
 	int stage_index;
 
+	int SE;
 	int handle[2];
 	int alpha;
 

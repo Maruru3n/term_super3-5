@@ -5,6 +5,7 @@
 
 void ScenePlay::Init()
 {
+	BGM = LoadSoundMem("Data/Sound/bgm_.mp3");
 	m_stage_clear_handle = LoadGraph("Data/Image/Play/Clear.png");
 	m_gameover_handle = LoadGraph("Data/Image/Play/GameOver.png");
 	m_handle_extend = 0.0;
@@ -25,6 +26,7 @@ void ScenePlay::Init()
 			}
 		}
 	}
+	PlaySoundMem(BGM, DX_PLAYTYPE_LOOP);
 }
 
 
@@ -119,7 +121,7 @@ void ScenePlay::Fin()
 {
 	FILE* fp;
 	errno_t err;
-
+	StopSoundMem(BGM);
 	err = fopen_s(&fp, "Data/Image/MapChip/SaveData.txt", "w");
 
 	if (err != NULL)

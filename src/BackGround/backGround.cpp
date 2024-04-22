@@ -25,7 +25,7 @@ void BackGround::Step() {
 	sun_pos_y = 720 + radius * sin(radian);
 	moon_pos_x = 585+ radius * cos(radian +181*3.1415/180);
 	moon_pos_y = 720 + radius * sin(radian + 180 * 3.1415 / 180);
-	radian += 0.002;
+	radian += 0.0017;
 	if (radian * 180 / 3.1415 >= 360) {
 		radian = 0;
 	}
@@ -113,10 +113,6 @@ void BackGround::Draw() {
 
 	DrawBox(0, 720, 1280, 0, GetColor(red, green, blue), true);//’©
 	
-	
-	//DrawBox(0, 720, 1280, 0, GetColor(28, 69, 123), true);//–é
 	DrawGraph(sun_pos_x, sun_pos_y, handle[0], true);
 	DrawGraph(moon_pos_x, moon_pos_y, handle[1], true);
-	DrawFormatString(30, 50, GetColor(255, 0, 0), "%f", radian*180/3.1415);
-	DrawFormatString(30, 70, GetColor(255, 0, 0), "%d", timeFlag);
 }

@@ -10,6 +10,7 @@ void SceneGameOver::Init()
 	handle[0] = LoadGraph("Data/Image/GameOver/gameOver.png");
 	handle[1] = LoadGraph("Data/Image/GameOver/gameOverUI.png");
 	alpha = 0;
+	SE = LoadSoundMem("Data/Sound/GameOver.bgm.mp3");
 
 	FILE* fp;
 	errno_t err;
@@ -23,7 +24,7 @@ void SceneGameOver::Init()
 	stage_index_c = fgetc(fp);
 
 	stage_index = stage_index_c - '0';
-
+	PlaySoundMem(SE, DX_PLAYTYPE_LOOP);
 	fclose(fp);
 }
 void SceneGameOver::Step()
@@ -47,5 +48,5 @@ void SceneGameOver::Draw()
 }
 void SceneGameOver::Fin()
 {
-
+	StopSoundMem(SE);
 }

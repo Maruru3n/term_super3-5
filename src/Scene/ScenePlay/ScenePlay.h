@@ -11,6 +11,7 @@ private:
 	MapChip mapchip;
 
 	int m_stage_clear_handle;
+	int BGM;
 	int m_gameover_handle;
 	double m_handle_extend;
 
