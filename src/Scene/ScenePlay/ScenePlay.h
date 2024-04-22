@@ -1,10 +1,12 @@
 #pragma once
 #include "../SceneBace/SceneBace.h"
 #include "../../GameCollision/GameCollision.h"
+#include "../../BackGround/backGround.h"
 
 class ScenePlay :public SceneBace
 {
 private:
+	BackGround backGround;
 	Player player;
 	MapChip mapchip;
 
