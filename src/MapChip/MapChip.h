@@ -7,11 +7,12 @@ constexpr int MAPCHIP_NUM_Y = 9;
 constexpr int MAPCHIP_SIZE_X = SCREEN_SIZE_X / 16;
 constexpr int MAPCHIP_SIZE_Y = SCREEN_SIZE_Y / 9;
 
-constexpr int STAGE_NUM = 2;
+constexpr int STAGE_NUM = 3;
 
 constexpr char MAPCHIP_DATA_PATH[STAGE_NUM][64] = {
 	{"Data/Image/MapChip/stage1.csv"},
 	{"Data/Image/MapChip/stage2.csv"},
+	{"Data/Image/MapChip/stage3.csv"},
 };
 
 class MapChip
