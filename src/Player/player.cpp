@@ -91,6 +91,8 @@ void Player::Step() {
 
 void Player::Move()
 {
+	int gravity_power = 9;
+
 	//ƒWƒƒƒ“ƒvˆ—
 	if (jumpFlag) {
 		animIndex = 2;
@@ -100,11 +102,13 @@ void Player::Move()
 			jumpPower = 0;
 		}
 	}
+	else
+		gravity_power = 1;
 	//‰¡ˆÚ“®ˆ—
 	if (moveXFlag) {
 		current_pos_x += movePowerX;
 	}
-	current_pos_y += 8;
+	current_pos_y += gravity_power;
 }
 
 

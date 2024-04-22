@@ -8,17 +8,17 @@ void CollisionMapPlayer(MapChip& mapchip, Player& player)
 {
 	player.SetJumpFlag(true);
 
-	VECTOR player_pos = { player.GetCurrentPosX() ,player.GetCurrentPosY(),0 };
-
-	if (player_pos.y < 0 || player_pos.y >= SCREEN_SIZE_Y - PLAYER_COLLISION_SIZE)
-		return;
-
 	for (int index_y = 0; index_y < MAPCHIP_NUM_Y; index_y++) {
 		for (int index_x = 0; index_x < MAPCHIP_NUM_X; index_x++) {
 			int mapdata = mapchip.GetMapData(index_y, index_x);
 			//ブロックがない又はプレイヤーの初期座標なら何も行わない
 			if (mapchip.GetMapData(index_y, index_x) == 0 || mapchip.GetMapData(index_y, index_x) == 1)
 				continue;
+
+			VECTOR player_pos = { player.GetCurrentPosX() ,player.GetCurrentPosY(),0 };
+			//プレイヤーが画面外なら当たり判定を行わない
+			if (player_pos.y < -PLAYER_COLLISION_SIZE || player_pos.y >= SCREEN_SIZE_Y - PLAYER_COLLISION_SIZE)
+				return;
 
 			VECTOR mapchip_pos = { (float)(index_x * MAPCHIP_SIZE_X) ,(float)(index_y * MAPCHIP_SIZE_Y) };
 
@@ -33,13 +33,6 @@ void CollisionMapPlayer(MapChip& mapchip, Player& player)
 																player_pos, PLAYER_COLLISION_SIZE, PLAYER_COLLISION_SIZE,
 																overlap_x, overlap_y);
 
-				//床が氷ならY座標だけ修正する
-				if (mapchip.GetMapData(index_y, index_x) == 4) {
-					if (mapchip_pos.y < player_pos.y)
-						direction_num = 1;
-					else
-						direction_num = 3;
-				}
 
 				switch (direction_num) {
 				case 0: {
