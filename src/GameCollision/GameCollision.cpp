@@ -13,8 +13,8 @@ void CollisionMapPlayer(MapChip& mapchip, Player& player)
 	if (player_pos.y < 0 || player_pos.y >= SCREEN_SIZE_Y - PLAYER_COLLISION_SIZE)
 		return;
 
-	for (int index_y = 0; index_y <= MAPCHIP_NUM_Y; index_y++) {
-		for (int index_x = 0; index_x <= MAPCHIP_NUM_X; index_x++) {
+	for (int index_y = 0; index_y < MAPCHIP_NUM_Y; index_y++) {
+		for (int index_x = 0; index_x < MAPCHIP_NUM_X; index_x++) {
 			int mapdata = mapchip.GetMapData(index_y, index_x);
 			//ブロックがない又はプレイヤーの初期座標なら何も行わない
 			if (mapchip.GetMapData(index_y, index_x) == 0 || mapchip.GetMapData(index_y, index_x) == 1)
