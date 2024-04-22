@@ -9,6 +9,7 @@ void ScenePlay::Init()
 	m_gameover_handle = LoadGraph("Data/Image/Play/GameOver.png");
 	m_handle_extend = 0.0;
 
+	backGround.Init();
 	player.Init();
 	mapchip.Init();
 
@@ -29,6 +30,7 @@ void ScenePlay::Init()
 
 void ScenePlay::Step()
 {
+	backGround.Step();
 	player.Step();
 	CollisionMapPlayer(mapchip, player);
 
@@ -92,6 +94,8 @@ void ScenePlay::Step()
 
 void ScenePlay::Draw()
 {
+	
+	backGround.Draw();
 	mapchip.Draw();
 	player.Draw();
 
