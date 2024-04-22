@@ -22,6 +22,7 @@ constexpr char MAPCHIP_DATA_PATH[STAGE_NUM][64] = {
 class MapChip
 {
 private:
+	int m_mapchip_handle[3];
 	int m_mapchip_data_num[MAPCHIP_NUM_Y][MAPCHIP_NUM_X];
 	int m_stage_index;
 
