@@ -41,7 +41,7 @@ void MapChip::Draw()
 						(index_x + 1) * MAPCHIP_SIZE_X,
 						(index_y + 1) * MAPCHIP_SIZE_Y,
 						GetColor(0, 255, 0), true);
-				DrawGraph(index_x * MAPCHIP_SIZE_X,
+				DrawGraph(index_x * MAPCHIP_SIZE_X - 10,
 							index_y * MAPCHIP_SIZE_Y,
 							m_mapchip_handle[1], true);
 			}
